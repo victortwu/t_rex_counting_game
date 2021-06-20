@@ -13,15 +13,23 @@ class App extends Component {
     }
   }
 
-makeCard =(answer)=> {
+setCard =(answer)=> {
 
   this.setState({
     answer: answer
   })
 }
 
+clearPlates =()=> {
+  this.setState({
+    plates: []
+  })
+}
+
 makePlates =()=> {
   console.log('makePlates() called...')
+
+  this.clearPlates()
   let copyPlates = []
   for (let i = 0; i < 4; i++) {
     const plateNode = {className: 'plate', value: Math.floor(Math.random() * 10 + 1)}
@@ -32,7 +40,8 @@ makePlates =()=> {
   this.setState({
       plates: copyPlates
   })
-  this.makeCard(answer)
+  this.setCard(answer)
+
 }
 
 
@@ -56,7 +65,7 @@ console.log(this.state.answer)
         </div>
 
         <div className='scoreBoardDiv'>
-            <GameController makePlates={this.makePlates}/>
+            <GameController makePlates={this.makePlates} plates={this.state.plates}/>
         </div>
         <footer>footer</footer>
 
