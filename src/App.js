@@ -14,41 +14,30 @@ class App extends Component {
   }
 
 setCard =(answer)=> {
-
   this.setState({
     answer: answer
   })
 }
 
-clearPlates =()=> {
-  this.setState({
-    plates: []
-  })
-}
 
 makePlates =()=> {
-  console.log('makePlates() called...')
-
-  this.clearPlates()
   let copyPlates = []
   for (let i = 0; i < 4; i++) {
     const plateNode = {className: 'plate', value: Math.floor(Math.random() * 10 + 1)}
     copyPlates.push(plateNode)
   }
   const answer = copyPlates[Math.floor(Math.random() * copyPlates.length)].value
-  console.log('Before makeCard called: ', answer)
   this.setState({
       plates: copyPlates
   })
   this.setCard(answer)
-
 }
 
 
 
 render() {
-console.log(this.state.plates)
-console.log(this.state.answer)
+// console.log(this.state.plates)
+// console.log(this.state.answer)
   return (
     <main className='mainContainer'>
         <div className='heading'>

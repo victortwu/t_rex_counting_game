@@ -1,7 +1,7 @@
 import '../App.js'
 
 const GameController = (props) => {
-console.log('At GameController: ', props.plates)
+// console.log('At GameController: ', props.plates)
   return(
     <>
     game controller
