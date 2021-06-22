@@ -8,6 +8,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
+      score: 0,
+      chances: 5,
       answer: null,
       plates: []
     }
@@ -33,11 +35,29 @@ makePlates =()=> {
   this.setCard(answer)
 }
 
+checkAnswer =(plateItems)=> {
+  if (plateItems === this.state.answer) {
+    let score = this.state.score + this.state.answer
+    this.setState({
+      score: score
+    })
+    alert(`Correct! You scored ${this.state.answer} bones!`)
+
+  } else {
+
+    let chances = this.state.chances - 1
+    this.setState({
+      chances: chances
+    })
+    alert(`Wrong!`)
+  }
+  this.makePlates()
+}
+
 
 
 render() {
-// console.log(this.state.plates)
-// console.log(this.state.answer)
+
   return (
     <main className='mainContainer'>
         <div className='heading'>
@@ -47,14 +67,21 @@ render() {
             <AnswerCard answer={this.state.answer}/>
         </div>
         <div className='platesDiv'>
-            <Plates plates={this.state.plates} makePlates={this.makePlates}/>
+            <Plates
+              plates={this.state.plates}
+              checkAnswer={this.checkAnswer}
+            />
         </div>
         <div className='trexDiv'>
         trex
         </div>
 
         <div className='scoreBoardDiv'>
-            <GameController makePlates={this.makePlates} plates={this.state.plates}/>
+            <GameController
+            makePlates={this.makePlates}
+            score={this.state.score}
+            chances={this.state.chances}
+            />
         </div>
         <footer>footer</footer>
 

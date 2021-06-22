@@ -15,9 +15,10 @@ const Plates =(props)=> {
       <div
         key={index}
         className={plate.className}
-        draggable
+        onClick={()=> props.checkAnswer(plate.value)}
       >
-        {appendDrumsticks(plate.value)}{plate.value}
+
+        <div className='drumStickWrapper'>{appendDrumsticks(plate.value)}</div>
       </div>
       )
     })

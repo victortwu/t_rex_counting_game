@@ -42,14 +42,25 @@
 .plate {
   height: 8rem;
   width: 12rem;
+  display: flex;
+  justify-content: center;
+
   border: solid 1px black;
   border-radius: 50%;
+}
+
+.drumStickWrapper {
+  width: 85%;
+  height: 75%;
+  margin: .7em;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
 }
 
 .drumStick {
   height: .5em;
   width: .5em;
-  margin: .3em;
+  margin: .7em;
   background: red
 }
 
