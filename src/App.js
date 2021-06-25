@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import Plates from './components/Plates'
 import GameController from './components/GameController'
 import AnswerCard from './components/AnswerCard'
+import Trex from './components/Trex'
 import './App.css';
 
 class App extends Component {
   constructor() {
     super()
+    this.trexRef = React.createRef()
     this.state = {
       score: 0,
       chances: 5,
@@ -35,12 +37,21 @@ makePlates =()=> {
   this.setCard(answer)
 }
 
-checkAnswer =(plateItems)=> {
+
+feedPlate =(plateNode)=> {
+  console.log('feedPlate called: ', plateNode)
+  plateNode.style.backgroundColor = 'red'
+  this.trexRef.current.style.backgroundColor = 'blue'
+}
+
+checkAnswer =(plateItems, plateNode)=> {
+  console.log(plateNode)
   if (plateItems === this.state.answer) {
     let score = this.state.score + this.state.answer
     this.setState({
       score: score
     })
+    this.feedPlate(plateNode)
     alert(`Correct! You scored ${this.state.answer} bones!`)
 
   } else {
@@ -51,14 +62,15 @@ checkAnswer =(plateItems)=> {
     })
     alert(`Wrong!`)
   }
-  this.makePlates()
+  // this.makePlates()
 }
 
 
 
 render() {
-
+console.log(this.trexRef)
   return (
+
     <main className='mainContainer'>
         <div className='heading'>
         heading
@@ -73,7 +85,7 @@ render() {
             />
         </div>
         <div className='trexDiv'>
-        trex
+            <Trex ref={this.trexRef}/>
         </div>
 
         <div className='scoreBoardDiv'>
@@ -87,6 +99,7 @@ render() {
 
 
     </main>
+
   )
 }
 

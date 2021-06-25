@@ -28,6 +28,9 @@
 
 .trexDiv {
   grid-area: trexDiv;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   border: solid 1px black;
 }
 
