@@ -10,12 +10,14 @@ class App extends Component {
     super()
     this.trexRef = React.createRef()
     this.state = {
+      count: 0,
       score: 0,
       chances: 5,
       answer: null,
-      plates: []
+      plates: [],
     }
   }
+
 
 setCard =(answer)=> {
   this.setState({
@@ -24,35 +26,74 @@ setCard =(answer)=> {
 }
 
 
-makePlates =()=> {
-  let copyPlates = []
-  for (let i = 0; i < 4; i++) {
-    const plateNode = {className: 'plate', value: Math.floor(Math.random() * 10 + 1)}
-    copyPlates.push(plateNode)
-  }
-  const answer = copyPlates[Math.floor(Math.random() * copyPlates.length)].value
+incrementCount =()=> {
+  let current = this.state.count
+  let increment = current + 1
   this.setState({
-      plates: copyPlates
+    count: increment
   })
-  this.setCard(answer)
 }
 
 
-feedPlate =(plateNode)=> {
-  console.log('feedPlate called: ', plateNode)
-  plateNode.style.backgroundColor = 'red'
-  this.trexRef.current.style.backgroundColor = 'blue'
+makePlates =()=> {
+  setTimeout(()=> {
+    let copyPlates = []
+    for (let i = 0; i < 4; i++) {
+      const plateNode = {className: 'plate', value: Math.floor(Math.random() * 10 + 1)}
+      copyPlates.push(plateNode)
+    }
+    const answer = copyPlates[Math.floor(Math.random() * copyPlates.length)].value
+    this.setState({
+        plates: copyPlates
+    })
+    this.setCard(answer)
+  }, 2500)
+
 }
 
-checkAnswer =(plateItems, plateNode)=> {
-  console.log(plateNode)
+
+trexEat1 = () => {
+  this.trexRef.current.style.animation = 'trexEating1 2s linear forwards'
+}
+
+trexEat2 = () => {
+  this.trexRef.current.style.animation = 'trexEating2 2s linear forwards'
+}
+
+
+feedPlate1 =(e)=> {
+  e.preventDefault()
+  e.target.style.animation = 'feedingPlate1 2s linear'
+}
+
+feedPlate2 =(e)=> {
+  e.preventDefault()
+  e.target.style.animation = 'feedingPlate2 2s linear'
+}
+
+
+checkAnswer =(plateItems, e)=> {
+
   if (plateItems === this.state.answer) {
-    let score = this.state.score + this.state.answer
+    const score = this.state.score + this.state.answer
     this.setState({
       score: score
     })
-    this.feedPlate(plateNode)
-    alert(`Correct! You scored ${this.state.answer} bones!`)
+    this.incrementCount()
+
+    if(this.state.count % 2 === 0){
+      this.trexEat1()
+      this.feedPlate1(e)
+
+    } else {
+      this.trexEat2()
+      this.feedPlate2(e)
+
+    }
+    this.makePlates()
+
+
+    // alert(`Correct! You scored ${this.state.answer} bones!`)
 
   } else {
 
@@ -61,14 +102,14 @@ checkAnswer =(plateItems, plateNode)=> {
       chances: chances
     })
     alert(`Wrong!`)
+    this.makePlates()
   }
-  // this.makePlates()
 }
 
 
 
 render() {
-console.log(this.trexRef)
+
   return (
 
     <main className='mainContainer'>
@@ -93,6 +134,8 @@ console.log(this.trexRef)
             makePlates={this.makePlates}
             score={this.state.score}
             chances={this.state.chances}
+            trexEat={this.trexEat}
+            trexEat2={this.trexEat2}
             />
         </div>
         <footer>footer</footer>

@@ -34,6 +34,17 @@
   border: solid 1px black;
 }
 
+.trex {
+  width: 75%;
+  height: 85%;
+  background-color: green;
+  animation: none
+}
+
+.triggerTrexChompAnim {
+  animation: trexEating 3s linear
+}
+
 .platesDiv {
   grid-area: platesDiv;
   display: flex;
@@ -46,24 +57,30 @@
   height: 8rem;
   width: 12rem;
   display: flex;
+  flex-direction: row;
   justify-content: center;
-
+  flex-wrap: wrap;
+  align-content: flex-start;
   border: solid 1px black;
   border-radius: 50%;
 }
 
-.drumStickWrapper {
+
+/* .drumStickWrapper {
   width: 85%;
   height: 75%;
   margin: .7em;
   display: grid;
   grid-template-columns: auto auto auto auto;
-}
+} */
 
 .drumStick {
+  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   height: .5em;
   width: .5em;
-  margin: .7em;
+  /* margin: .7em; */
   background: red
 }
 
@@ -75,4 +92,87 @@
 footer {
   grid-area: footer;
   border: solid 1px black;
+}
+
+@keyframes feedingPlate1 {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: blue;
+  }
+  75% {
+    background-color: green;
+
+  }
+  100% {
+    background-color: none;
+  }
+}
+
+@keyframes feedingPlate2 {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: blue;
+  }
+  75% {
+    background-color: green;
+
+  }
+  100% {
+    background-color: none;
+  }
+}
+
+@keyframes trexEating1 {
+  0% {
+    background-color: blue;
+  }
+  20% {
+    background-color: yellow;
+  }
+  40% {
+    background-color: orange;
+  }
+  60% {
+    background-color: purple;
+  }
+  80%{
+    background-color: red;
+  }
+  100% {
+    background-color: green;
+  }
+}
+
+@keyframes trexEating2 {
+  0% {
+    background-color: blue;
+  }
+  20% {
+    background-color: yellow;
+  }
+  40% {
+    background-color: orange;
+  }
+  60% {
+    background-color: purple;
+  }
+  80%{
+    background-color: red;
+  }
+  100% {
+    background-color: green;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

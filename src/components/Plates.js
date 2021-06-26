@@ -4,9 +4,11 @@ import '../App.css'
 class Plates extends Component {
   constructor(props){
     super(props)
-    
+
   }
+
 render(){
+
 
   const appendDrumsticks = (len) => {
     let drumSticks = []
@@ -23,10 +25,10 @@ render(){
         key={index}
         ref={ref}
         className={plate.className}
-        onClick={()=> this.props.checkAnswer(plate.value, ref.current)}
+        onClick={(e)=> this.props.checkAnswer(plate.value, e)}
       >
 
-        <div className='drumStickWrapper'>{appendDrumsticks(plate.value)}</div>
+        {appendDrumsticks(plate.value)}
 
       </div>
       )
