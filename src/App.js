@@ -10,6 +10,7 @@ class App extends Component {
     super()
     this.trexRef = React.createRef()
     this.state = {
+      platesOn: true,
       count: 0,
       score: 0,
       chances: 5,
@@ -37,23 +38,27 @@ incrementCount =()=> {
 
 makePlates =()=> {
   console.log('makePlates called')
-  setTimeout(()=> {
-    let copyPlates = []
-    for (let i = 0; i < 4; i++) {
-      const plateNode = {
-        className: 'plate',
-        value: Math.floor(Math.random() * 10 + 1),
-      }
-      copyPlates.push(plateNode)
-    }
-    const answer = copyPlates[Math.floor(Math.random() * copyPlates.length)].value
-    this.setState({
-        plates: copyPlates
-    })
-    this.setCard(answer)
-  }, 2500)
+  console.log(this.state.score)
 
-}
+    setTimeout(()=> {
+      let copyPlates = []
+      for (let i = 0; i < 4; i++) {
+        const plateNode = {
+          className: 'plate',
+          value: Math.floor(Math.random() * 10 + 1),
+        }
+        copyPlates.push(plateNode)
+      }
+      const answer = copyPlates[Math.floor(Math.random() * copyPlates.length)].value
+      this.setState({
+          plates: copyPlates
+      })
+      this.setCard(answer)
+    }, 2500)
+  }
+
+
+
 
 
 trexEat1 = () => {
@@ -78,21 +83,9 @@ feedPlate2 =(e)=> {
 endGame =()=> {
   this.setState({
     plates: [],
-    score: 0
+    score: 0,
+    platesOn: false
   })
-}
-
-checkIfWon =()=> {
-  if (this.state.score >= 50){
-    alert('YOU WON!')
-    this.setState({
-      plates: [],
-      score: 0
-    })
-  }
-  else {
-    this.makePlates()
-  }
 }
 
 checkAnswer =(plateItems, e)=> {
@@ -113,8 +106,8 @@ checkAnswer =(plateItems, e)=> {
       this.trexEat2()
       this.feedPlate2(e)
     }
-    this.checkIfWon()
-    // this.makePlates()
+
+    this.makePlates()
     // alert(`Correct! You scored ${this.state.answer} bones!`)
   } else {
 
@@ -127,8 +120,8 @@ checkAnswer =(plateItems, e)=> {
       if(this.state.chances === 2){
         alert('Last try left!')
       }
-      this.checkIfWon()
-      // this.makePlates()
+
+      this.makePlates()
     }
     else {
       alert('Game Over')//need a modal to cover up everything
@@ -141,14 +134,13 @@ play =()=> {
   this.setState({
     plates: [],
     score: 0,
-    chances: 5
+    chances: 5,
+    platesOn: true
   })
   this.makePlates()
 }
 
-componentDidMount() {
-  console.log('component mounting')
-}
+
 
 render() {
 
@@ -163,8 +155,12 @@ render() {
         </div>
         <div className='platesDiv'>
             <Plates
+              platesOn={this.state.platesOn}
+              endGame={this.endGame}
               plates={this.state.plates}
               checkAnswer={this.checkAnswer}
+              score={this.state.score}
+              chances={this.state.chances}
             />
         </div>
         <div className='trexDiv'>
