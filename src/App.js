@@ -36,10 +36,14 @@ incrementCount =()=> {
 
 
 makePlates =()=> {
+  console.log('makePlates called')
   setTimeout(()=> {
     let copyPlates = []
     for (let i = 0; i < 4; i++) {
-      const plateNode = {className: 'plate', value: Math.floor(Math.random() * 10 + 1)}
+      const plateNode = {
+        className: 'plate',
+        value: Math.floor(Math.random() * 10 + 1),
+      }
       copyPlates.push(plateNode)
     }
     const answer = copyPlates[Math.floor(Math.random() * copyPlates.length)].value
@@ -71,10 +75,30 @@ feedPlate2 =(e)=> {
   e.target.style.animation = 'feedingPlate2 2s linear'
 }
 
+endGame =()=> {
+  this.setState({
+    plates: [],
+    score: 0
+  })
+}
+
+checkIfWon =()=> {
+  if (this.state.score >= 50){
+    alert('YOU WON!')
+    this.setState({
+      plates: [],
+      score: 0
+    })
+  }
+  else {
+    this.makePlates()
+  }
+}
 
 checkAnswer =(plateItems, e)=> {
 
   if (plateItems === this.state.answer) {
+
     const score = this.state.score + this.state.answer
     this.setState({
       score: score
@@ -88,13 +112,10 @@ checkAnswer =(plateItems, e)=> {
     } else {
       this.trexEat2()
       this.feedPlate2(e)
-
     }
-    this.makePlates()
-
-
+    this.checkIfWon()
+    // this.makePlates()
     // alert(`Correct! You scored ${this.state.answer} bones!`)
-
   } else {
 
     let chances = this.state.chances - 1
@@ -102,11 +123,32 @@ checkAnswer =(plateItems, e)=> {
       chances: chances
     })
     alert(`Wrong!`)
-    this.makePlates()
+    if(this.state.chances > 1){
+      if(this.state.chances === 2){
+        alert('Last try left!')
+      }
+      this.checkIfWon()
+      // this.makePlates()
+    }
+    else {
+      alert('Game Over')//need a modal to cover up everything
+      this.endGame()
+    }
   }
 }
 
+play =()=> {
+  this.setState({
+    plates: [],
+    score: 0,
+    chances: 5
+  })
+  this.makePlates()
+}
 
+componentDidMount() {
+  console.log('component mounting')
+}
 
 render() {
 
@@ -131,11 +173,10 @@ render() {
 
         <div className='scoreBoardDiv'>
             <GameController
-            makePlates={this.makePlates}
-            score={this.state.score}
-            chances={this.state.chances}
-            trexEat={this.trexEat}
-            trexEat2={this.trexEat2}
+              play={this.play}
+              score={this.state.score}
+              chances={this.state.chances}
+
             />
         </div>
         <footer>footer</footer>

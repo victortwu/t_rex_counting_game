@@ -1,14 +1,7 @@
 import React, { Component } from 'react'
 import '../App.css'
 
-class Plates extends Component {
-  constructor(props){
-    super(props)
-
-  }
-
-render(){
-
+const Plates = (props) => {
 
   const appendDrumsticks = (len) => {
     let drumSticks = []
@@ -18,14 +11,13 @@ render(){
     return drumSticks
   }
 
-  const plates = this.props.plates.map((plate, index)=> {
-    const ref = React.createRef()
+  const plates = props.plates.map((plate, index)=> {
+
     return(
       <div
         key={index}
-        ref={ref}
         className={plate.className}
-        onClick={(e)=> this.props.checkAnswer(plate.value, e)}
+        onClick={(e)=> props.checkAnswer(plate.value, e)}
       >
 
         {appendDrumsticks(plate.value)}
@@ -39,8 +31,6 @@ render(){
     {plates}
     </>
   )
-}
-
 }
 
 export default Plates
