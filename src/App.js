@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Plates from './components/Plates'
+import Plates2 from './components/Plates2'
 import GameController from './components/GameController'
 import AnswerCard from './components/AnswerCard'
 import Trex from './components/Trex'
@@ -10,7 +11,9 @@ class App extends Component {
     super()
     this.trexRef = React.createRef()
     this.state = {
-      platesOn: true,
+      levelOne: true,
+      levelTwo: false,
+      open: true,
       count: 0,
       score: 0,
       chances: 5,
@@ -65,7 +68,7 @@ makePlates =()=> {
   makeAdditionPlates =()=> {
     console.log('makeAdditionPlates called')
     // console.log(this.state.score)
-    
+
       setTimeout(()=> {
         let copyPlates = []
         const randomNumber =()=> {
@@ -119,11 +122,17 @@ feedPlate2 =(e)=> {
   e.target.style.animation = 'feedingPlate2 2s linear'
 }
 
+endLevelOne =()=> {
+  this.setState({
+    levelOne: false
+  })
+}
+
 endGame =()=> {
   this.setState({
     plates: [],
     score: 0,
-    platesOn: false
+    // platesOn: false
   })
 }
 
@@ -187,12 +196,14 @@ play =()=> {
   this.makePlates()
 }
 
-
+closeMessage =()=> {
+  this.setState({
+    open: false
+  })
+}
 
 render() {
-console.log(this.state.plates)
-console.log(this.state.answer)
-console.log(this.state.displayAnswer)
+
   return (
 
     <main className='mainContainer'>
@@ -203,15 +214,22 @@ console.log(this.state.displayAnswer)
             <AnswerCard answer={this.state.answer} displayAnswer={this.state.displayAnswer}/>
         </div>
         <div className='platesDiv'>
-            <Plates
-              makeAdditionPlates={this.makeAdditionPlates}
-              platesOn={this.state.platesOn}
-              endGame={this.endGame}
-              plates={this.state.plates}
-              checkAnswer={this.checkAnswer}
-              score={this.state.score}
-              chances={this.state.chances}
-            />
+            {
+              this.state.levelOne ?
+              <Plates
+                makeAdditionPlates={this.makeAdditionPlates}
+                levelOne={this.state.levelOne}
+                endLevelOne={this.endLevelOne}
+                endGame={this.endGame}
+                plates={this.state.plates}
+                checkAnswer={this.checkAnswer}
+                score={this.state.score}
+                chances={this.state.chances}
+              />
+              :
+              <Plates2 open={this.state.open} closeMessage={this.closeMessage}/>
+            }
+
         </div>
         <div className='trexDiv'>
             <Trex ref={this.trexRef}/>

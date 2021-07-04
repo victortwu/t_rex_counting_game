@@ -9,31 +9,19 @@ class Plates extends Component {
     }
   }
 
-setMessage =()=> {
-  this.setState({
-    message: false
-  })
-}
 
-levelOneMessage =()=> {
-  alert('You got to the next level!')
-}
 
   render(){
 
-    if (this.props.score >= 50 && this.state.message === true) {
-        this.levelOneMessage()
-        this.setMessage()
-        this.props.makeAdditionPlates()
-    }
+
 
     let plates
-    const checkWinner =()=> {
-      console.log('CHECKWINNER CALLED')
-      if ( this.props.score >= 100 ) {
+    
+      if ( this.props.score >= 50 ) {
 
-        alert(`YOU WIN! You got ${this.props.score} bones!`)
-        this.props.endGame()
+
+        // this.props.endGame()
+        this.props.endLevelOne()
 
       } else {
         const appendDrumsticks = (len) => {
@@ -62,11 +50,11 @@ levelOneMessage =()=> {
             )
           })
       }
-    }
 
-    if (this.props.platesOn){
-      checkWinner()
-    }
+
+    // if (this.props.levelOne){
+    //   checkWinner()
+    // }
 
 
 

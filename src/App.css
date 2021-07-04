@@ -89,6 +89,16 @@
   border: solid 1px black;
 }
 
+/* ======== MODAL STUFF ======= */
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
 footer {
   grid-area: footer;
   border: solid 1px black;
