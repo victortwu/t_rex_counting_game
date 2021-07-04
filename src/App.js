@@ -15,16 +15,19 @@ class App extends Component {
       score: 0,
       chances: 5,
       answer: null,
+      displayAnswer: '',
       plates: [],
     }
   }
 
 
-setCard =(answer)=> {
+setCard =(answer, displayAnswer)=> {
   this.setState({
-    answer: answer
+    answer: answer,
+    displayAnswer: displayAnswer
   })
 }
+
 
 
 incrementCount =()=> {
@@ -49,15 +52,51 @@ makePlates =()=> {
         }
         copyPlates.push(plateNode)
       }
-      const answer = copyPlates[Math.floor(Math.random() * copyPlates.length)].value
+      const randomIndex = Math.floor(Math.random() * copyPlates.length)
+      const diplayAnswer = `${copyPlates[randomIndex].value}`
+      const answer = copyPlates[randomIndex].value
       this.setState({
           plates: copyPlates
       })
-      this.setCard(answer)
+      this.setCard(answer, diplayAnswer)
     }, 2500)
   }
 
-
+  makeAdditionPlates =()=> {
+    console.log('makeAdditionPlates called')
+    // console.log(this.state.score)
+    
+      setTimeout(()=> {
+        let copyPlates = []
+        const randomNumber =()=> {
+          return Math.floor(Math.random() * 10 + 1)
+        }
+        for (let i = 0; i < 4; i++) {
+          let num1 = randomNumber()
+          let num2 = randomNumber()
+          let diff = 10 - num1
+          let sum = num1 + num2
+          if(sum > 10){
+            num2 = diff
+            sum = num1 + num2
+          }
+          const plateNode = {
+            className: 'plate',
+            num1: num1,
+            num2: num2,
+            value: sum,
+          }
+          copyPlates.push(plateNode)
+        }
+        const randomIndex = Math.floor(Math.random() * copyPlates.length)
+        const displayAnswer = `${copyPlates[randomIndex].num1} + ${copyPlates[randomIndex].num2}`
+        const answer = copyPlates[randomIndex].num1 + copyPlates[randomIndex].num2
+        this.setState({
+            plates: copyPlates
+        })
+        this.setCard(answer, displayAnswer)
+      }, 2500)
+    }
 
 
 
@@ -106,8 +145,12 @@ checkAnswer =(plateItems, e)=> {
       this.trexEat2()
       this.feedPlate2(e)
     }
+    if(this.state.score > 50){
+      this.makeAdditionPlates()
+    } else {
+      this.makePlates()
+    }
 
-    this.makePlates()
     // alert(`Correct! You scored ${this.state.answer} bones!`)
   } else {
 
@@ -120,8 +163,12 @@ checkAnswer =(plateItems, e)=> {
       if(this.state.chances === 2){
         alert('Last try left!')
       }
+      if(this.state.score > 50){
+        this.makeAdditionPlates()
+      } else {
+        this.makePlates()
+      }
 
-      this.makePlates()
     }
     else {
       alert('Game Over')//need a modal to cover up everything
@@ -143,7 +190,9 @@ play =()=> {
 
 
 render() {
-
+console.log(this.state.plates)
+console.log(this.state.answer)
+console.log(this.state.displayAnswer)
   return (
 
     <main className='mainContainer'>
@@ -151,10 +200,11 @@ render() {
         heading
         </div>
         <div className='cardDiv'>
-            <AnswerCard answer={this.state.answer}/>
+            <AnswerCard answer={this.state.answer} displayAnswer={this.state.displayAnswer}/>
         </div>
         <div className='platesDiv'>
             <Plates
+              makeAdditionPlates={this.makeAdditionPlates}
               platesOn={this.state.platesOn}
               endGame={this.endGame}
               plates={this.state.plates}
@@ -169,6 +219,7 @@ render() {
 
         <div className='scoreBoardDiv'>
             <GameController
+              makeAdditionPlates={this.makeAdditionPlates}
               play={this.play}
               score={this.state.score}
               chances={this.state.chances}

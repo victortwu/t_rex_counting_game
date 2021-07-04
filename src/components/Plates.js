@@ -4,19 +4,35 @@ import '../App.css'
 class Plates extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      message: true
+    }
   }
 
+setMessage =()=> {
+  this.setState({
+    message: false
+  })
+}
 
-
+levelOneMessage =()=> {
+  alert('You got to the next level!')
+}
 
   render(){
-    console.log(this.props.score)
-    console.log(this.props.chances)
+
+    if (this.props.score >= 50 && this.state.message === true) {
+        this.levelOneMessage()
+        this.setMessage()
+        this.props.makeAdditionPlates()
+    }
+
     let plates
     const checkWinner =()=> {
-      if ( this.props.score >= 50 ) {
-        
-        alert(`YOU WON! You got ${this.props.score} bones!`)
+      console.log('CHECKWINNER CALLED')
+      if ( this.props.score >= 100 ) {
+
+        alert(`YOU WIN! You got ${this.props.score} bones!`)
         this.props.endGame()
 
       } else {
