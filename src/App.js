@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Plates from './components/Plates'
+import Plates1 from './components/Plates1'
 import Plates2 from './components/Plates2'
 import GameController from './components/GameController'
 import AnswerCard from './components/AnswerCard'
@@ -124,15 +124,19 @@ feedPlate2 =(e)=> {
 
 endLevelOne =()=> {
   this.setState({
-    levelOne: false
+    levelOne: false,
+    levelTwo: true
   })
+  this.makeAdditionPlates()
 }
 
 endGame =()=> {
   this.setState({
     plates: [],
     score: 0,
-    // platesOn: false
+    levelTwo: false,
+    levelOne: true,
+    chances: 5
   })
 }
 
@@ -154,7 +158,7 @@ checkAnswer =(plateItems, e)=> {
       this.trexEat2()
       this.feedPlate2(e)
     }
-    if(this.state.score > 50){
+    if(this.state.levelTwo){
       this.makeAdditionPlates()
     } else {
       this.makePlates()
@@ -172,7 +176,7 @@ checkAnswer =(plateItems, e)=> {
       if(this.state.chances === 2){
         alert('Last try left!')
       }
-      if(this.state.score > 50){
+      if(this.state.levelTwo){
         this.makeAdditionPlates()
       } else {
         this.makePlates()
@@ -191,7 +195,7 @@ play =()=> {
     plates: [],
     score: 0,
     chances: 5,
-    platesOn: true
+    levelOne: true
   })
   this.makePlates()
 }
@@ -216,18 +220,23 @@ render() {
         <div className='platesDiv'>
             {
               this.state.levelOne ?
-              <Plates
-                makeAdditionPlates={this.makeAdditionPlates}
+              <Plates1
                 levelOne={this.state.levelOne}
                 endLevelOne={this.endLevelOne}
-                endGame={this.endGame}
                 plates={this.state.plates}
                 checkAnswer={this.checkAnswer}
                 score={this.state.score}
-                chances={this.state.chances}
+
               />
               :
-              <Plates2 open={this.state.open} closeMessage={this.closeMessage}/>
+              <Plates2
+                score={this.state.score}
+                open={this.state.open}
+                closeMessage={this.closeMessage}
+                checkAnswer={this.checkAnswer}
+                plates={this.state.plates}
+                endGame={this.endGame}
+              />
             }
 
         </div>

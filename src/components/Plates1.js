@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../App.css'
 
-class Plates extends Component {
+class Plates1 extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -13,10 +13,10 @@ class Plates extends Component {
 
   render(){
 
-
+  
 
     let plates
-    
+
       if ( this.props.score >= 50 ) {
 
 
@@ -72,4 +72,4 @@ class Plates extends Component {
 
 
 
-export default Plates
+export default Plates1
