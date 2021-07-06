@@ -13,7 +13,7 @@ class Plates1 extends Component {
 
   render(){
 
-  
+
 
     let plates
 
@@ -31,7 +31,7 @@ class Plates1 extends Component {
           }
           return drumSticks
         }
-
+        
         plates = this.props.plates.map((plate, index)=> {
 
           return(

@@ -6,10 +6,21 @@ const GameController = (props) => {
 
   return(
     <>
-    game controller
+
     <button onClick={()=> props.play()}>PLAY</button>
-    <button onClick={()=> props.makeAdditionPlates()}>Addition</button>
-    <h1>Score: {props.score}, Chances left: {props.chances}</h1>
+    <table>
+      <tbody>
+        <tr><td>Score:</td></tr>
+        <tr><td id='scoreCell'>{props.score}</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <tbody>
+        <tr><td>Chances Left:</td></tr>
+        <tr><td id='chancesCell'>{props.chances}</td></tr>
+      </tbody>
+    </table>
+
     </>
   )
 }

@@ -3,10 +3,11 @@
   display: grid;
   height: 100vh;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.5fr 1.2fr 1.2fr 1.2fr 1.2fr 0.5fr;
+  grid-template-rows: 0.5fr 1fr 1fr 1fr 1fr 0.3fr;
   grid-template-areas:
     'heading heading'
     'cardDiv platesDiv'
+    'trexDiv platesDiv'
     'trexDiv platesDiv'
     'trexDiv platesDiv'
     'trexDiv scoreBoardDiv'
@@ -17,13 +18,27 @@
 .heading {
   grid-area: heading;
 
-  border: solid 1px black;
+
 }
 
 .cardDiv {
   grid-area: cardDiv;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
+}
+
+.answerBubble {
+  width: 75%;
+  height: 75%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   border: solid 1px black;
+  border-radius: .5em;
+  font-size: 2.5rem;
+  animation: fadeIn1 1s;
 }
 
 .trexDiv {
@@ -31,18 +46,17 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: solid 1px black;
+
 }
 
 .trex {
+  background-image: url('./static/Dino 1 copy 2.png');
+  background-size: contain;
+  background-repeat: no-repeat;
   width: 75%;
   height: 85%;
-  background-color: green;
-  animation: none
-}
 
-.triggerTrexChompAnim {
-  animation: trexEating 3s linear
+  animation: none
 }
 
 .platesDiv {
@@ -51,9 +65,10 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+
 }
 
-.plate {
+.plate1 {
   height: 8rem;
   width: 12rem;
   display: flex;
@@ -63,31 +78,56 @@
   align-content: flex-start;
   border: solid 1px black;
   border-radius: 50%;
+
+}
+
+.plate2 {
+  height: 8rem;
+  width: 12rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  border: solid 1px blue;
+  border-radius: 50%;
+  animation: fadeIn 1s
 }
 
 
-/* .drumStickWrapper {
-  width: 85%;
-  height: 75%;
-  margin: .7em;
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-} */
-
 .drumStick {
-  margin-top: 2rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  height: .5em;
-  width: .5em;
-  /* margin: .7em; */
-  background: red
+  margin-top: 1rem;
+  margin-left: .8rem;
+  margin-right: .8rem;
+
+  height: 1em;
+  width: 1.5em;
+  background-image: url('./static/Drumstick copy.png');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .scoreBoardDiv {
   grid-area: scoreBoardDiv;
-  border: solid 1px black;
+  display: flex;
+  justify-content: space-evenly;
 }
+
+.scoreBoardDiv > button {
+  height: 50%;
+}
+
+.scoreBoardDiv > table {
+  padding: .2em;
+  border: solid 1px black;
+  border-radius: .5em;
+}
+
+#scoreCell, #chancesCell {
+  text-align: center;
+  border-top: solid 1px black
+}
+
 
 /* ======== MODAL STUFF ======= */
 
@@ -101,84 +141,83 @@
 
 footer {
   grid-area: footer;
-  border: solid 1px black;
+
 }
 
 @keyframes feedingPlate1 {
   0% {
-    background-color: red;
-  }
-  50% {
-    background-color: blue;
-  }
-  75% {
-    background-color: green;
-
+    transform: translateX(0px);
   }
   100% {
-    background-color: none;
+    transform: translateX(-300px);
+    opacity: 0;
   }
 }
 
 @keyframes feedingPlate2 {
   0% {
-    background-color: red;
-  }
-  50% {
-    background-color: blue;
-  }
-  75% {
-    background-color: green;
-
+    transform: translateX(0px);
   }
   100% {
-    background-color: none;
+    transform: translateX(-300px);
+    opacity: 0;
   }
 }
 
+
+
 @keyframes trexEating1 {
   0% {
-    background-color: blue;
+    background-image: url('./static/Dino 2 copy 2.png');
   }
   20% {
-    background-color: yellow;
+    background-image: url('./static/Dino 1 copy 2.png');
   }
   40% {
-    background-color: orange;
+    background-image: url('./static/Dino 2 copy 2.png');
   }
   60% {
-    background-color: purple;
+    background-image: url('./static/Dino 1 copy 2.png');
   }
   80%{
-    background-color: red;
+    background-image: url('./static/Dino 2 copy 2.png');
   }
   100% {
-    background-color: green;
+    background-image: url('./static/Dino 1 copy 2.png');
   }
 }
 
 @keyframes trexEating2 {
   0% {
-    background-color: blue;
+    background-image: url('./static/Dino 2 copy 2.png');
   }
   20% {
-    background-color: yellow;
+    background-image: url('./static/Dino 1 copy 2.png');
   }
   40% {
-    background-color: orange;
+    background-image: url('./static/Dino 2 copy 2.png');
   }
   60% {
-    background-color: purple;
+    background-image: url('./static/Dino 1 copy 2.png');
   }
   80%{
-    background-color: red;
+    background-image: url('./static/Dino 2 copy 2.png');
   }
   100% {
-    background-color: green;
+    background-image: url('./static/Dino 1 copy 2.png');
   }
 }
 
-@keyframes fadeIn {
+@keyframes fadeIn1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn2 {
   0% {
     opacity: 0;
   }

@@ -1,12 +1,16 @@
 import '../App.css'
 
 const AnswerCard = (props) => {
-
+  const showCard =()=> {
+    return(
+      <div className='answerBubble'>
+        {props.displayAnswer}
+      </div>
+    )
+  }
   return(
     <>
-    <div className='answerBubble'>
-      {props.displayAnswer}
-    </div>
+      {showCard()}
     </>
   )
 }

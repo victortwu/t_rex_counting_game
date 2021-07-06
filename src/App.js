@@ -48,9 +48,10 @@ makePlates =()=> {
 
     setTimeout(()=> {
       let copyPlates = []
+
       for (let i = 0; i < 4; i++) {
         const plateNode = {
-          className: 'plate',
+          className: 'plate1',
           value: Math.floor(Math.random() * 10 + 1),
         }
         copyPlates.push(plateNode)
@@ -84,7 +85,7 @@ makePlates =()=> {
             sum = num1 + num2
           }
           const plateNode = {
-            className: 'plate',
+            className: 'plate1',
             num1: num1,
             num2: num2,
             value: sum,
