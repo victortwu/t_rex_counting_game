@@ -4,6 +4,8 @@ import Plates2 from './components/Plates2'
 import GameController from './components/GameController'
 import AnswerCard from './components/AnswerCard'
 import Trex from './components/Trex'
+import CorrectModal from './components/CorrectModal'
+import WrongAnswerModal from './components/WrongAnswerModal'
 import './App.css';
 
 class App extends Component {
@@ -14,6 +16,8 @@ class App extends Component {
       levelOne: true,
       levelTwo: false,
       open: true,
+      correctOpen: false,
+      wrongOpen: false,
       count: 0,
       score: 0,
       chances: 5,
@@ -23,6 +27,33 @@ class App extends Component {
     }
   }
 
+openCorrectModal =()=> {
+    this.setState({
+      correctOpen: true
+    })
+}
+
+closeCorrectModal =()=> {
+  setTimeout(()=> {
+    this.setState({
+      correctOpen: false
+    })
+  }, 2500)
+}
+
+openWrongAnswerModal =()=> {
+    this.setState({
+      wrongOpen: true
+    })
+}
+
+closeWrongAnswerModal =()=> {
+  setTimeout(()=> {
+    this.setState({
+      wrongOpen: false
+    })
+  }, 2500)
+}
 
 setCard =(answer, displayAnswer)=> {
   this.setState({
@@ -164,7 +195,8 @@ checkAnswer =(plateItems, e)=> {
     } else {
       this.makePlates()
     }
-
+    this.openCorrectModal()
+    this.closeCorrectModal()
     // alert(`Correct! You scored ${this.state.answer} bones!`)
   } else {
 
@@ -172,7 +204,8 @@ checkAnswer =(plateItems, e)=> {
     this.setState({
       chances: chances
     })
-    alert(`Wrong!`)
+    this.openWrongAnswerModal()
+    this.closeWrongAnswerModal()
     if(this.state.chances > 1){
       if(this.state.chances === 2){
         alert('Last try left!')
@@ -205,6 +238,12 @@ closeMessage =()=> {
   this.setState({
     open: false
   })
+}
+
+
+
+closeWrongModal =()=> {
+
 }
 
 render() {
@@ -247,7 +286,6 @@ render() {
 
         <div className='scoreBoardDiv'>
             <GameController
-              makeAdditionPlates={this.makeAdditionPlates}
               play={this.play}
               score={this.state.score}
               chances={this.state.chances}
@@ -256,7 +294,13 @@ render() {
         </div>
         <footer>footer</footer>
 
+        <CorrectModal
+          correctOpen={this.state.correctOpen}
+        />
 
+        <WrongAnswerModal
+          wrongOpen={this.state.wrongOpen}
+        />
     </main>
 
   )

@@ -139,6 +139,54 @@
   display: none;
 }
 
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: rgba(0,0,0,.8)
+}
+
+.modalBackgroundCorrect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+.nextLevel{
+  position: fixed;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  background-color: red;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.answerFeedback {
+  width: 30%;
+  height: 30%;
+  background-color: yellow;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  animation: fadeIn 1s;
+}
+
+
+
 footer {
   grid-area: footer;
 
@@ -208,16 +256,7 @@ footer {
   }
 }
 
-@keyframes fadeIn1 {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn2 {
+@keyframes fadeIn {
   0% {
     opacity: 0;
   }

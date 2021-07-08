@@ -14,10 +14,19 @@ const Plates2 =(props)=> {
 
 
   const nextLevelMessage =()=> {
-    close()
-    return(
-      <div className={toggleClass}>YOU GOT TO THE NEXT LEVEL!</div>
-    )
+
+      close()
+      return(
+        <div className={toggleClass}>
+          <div className='nextLevelModalContainer'>
+            <div className='nextLevel'>
+              <div>YOU GOT TO THE NEXT LEVEL!</div>
+            </div>
+          </div>
+        </div>
+
+      )
+
   }
 
 
