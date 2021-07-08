@@ -7,7 +7,7 @@ const CorrectModal =(props)=> {
 
   return(
     <div className={toggleClass}>
-      <div className='modalBackgroundCorrect'>
+      <div className='modalContainerNoBackground'>
         <div className='answerFeedback'>
         Correct!
         </div>

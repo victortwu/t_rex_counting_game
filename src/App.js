@@ -6,6 +6,7 @@ import AnswerCard from './components/AnswerCard'
 import Trex from './components/Trex'
 import CorrectModal from './components/CorrectModal'
 import WrongAnswerModal from './components/WrongAnswerModal'
+import NextLevelModal from './components/NextLevelModal'
 import './App.css';
 
 class App extends Component {
@@ -15,9 +16,9 @@ class App extends Component {
     this.state = {
       levelOne: true,
       levelTwo: false,
-      open: true,
       correctOpen: false,
       wrongOpen: false,
+      nextLevelOpen: false,
       count: 0,
       score: 0,
       chances: 5,
@@ -51,6 +52,20 @@ closeWrongAnswerModal =()=> {
   setTimeout(()=> {
     this.setState({
       wrongOpen: false
+    })
+  }, 2500)
+}
+
+openNextLevelModal =()=> {
+    this.setState({
+      nextLevelOpen: true
+    })
+}
+
+closeNextLevelModal =()=> {
+  setTimeout(()=> {
+    this.setState({
+      nextLevelOpen: false
     })
   }, 2500)
 }
@@ -159,6 +174,8 @@ endLevelOne =()=> {
     levelOne: false,
     levelTwo: true
   })
+  this.openNextLevelModal()
+  this.closeNextLevelModal()
   this.makeAdditionPlates()
 }
 
@@ -294,13 +311,12 @@ render() {
         </div>
         <footer>footer</footer>
 
-        <CorrectModal
-          correctOpen={this.state.correctOpen}
-        />
+        <CorrectModal correctOpen={this.state.correctOpen} />
 
-        <WrongAnswerModal
-          wrongOpen={this.state.wrongOpen}
-        />
+        <WrongAnswerModal wrongOpen={this.state.wrongOpen} />
+
+        <NextLevelModal nextLevelOpen={this.state.nextLevelOpen} />
+
     </main>
 
   )

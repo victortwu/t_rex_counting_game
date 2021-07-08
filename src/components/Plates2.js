@@ -3,33 +3,6 @@ import '../App.css'
 
 const Plates2 =(props)=> {
 
-
-  const toggleClass = props.open ? 'show' : 'hide'
-
-  const close =()=> {
-    setTimeout(()=>{
-      props.closeMessage()
-    }, 3000)
-  }
-
-
-  const nextLevelMessage =()=> {
-
-      close()
-      return(
-        <div className={toggleClass}>
-          <div className='nextLevelModalContainer'>
-            <div className='nextLevel'>
-              <div>YOU GOT TO THE NEXT LEVEL!</div>
-            </div>
-          </div>
-        </div>
-
-      )
-
-  }
-
-
   let plates
 
     if ( props.score >= 100 ) {
@@ -72,7 +45,6 @@ const Plates2 =(props)=> {
 
   return(
     <>
-    {nextLevelMessage()}
     {plates}
     </>
   )
