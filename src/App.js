@@ -13,6 +13,7 @@ class App extends Component {
   constructor() {
     super()
     this.trexRef = React.createRef()
+    this.backGroundRef = React.createRef()
     this.state = {
       levelOne: true,
       levelTwo: false,
@@ -114,7 +115,7 @@ makePlates =()=> {
 
   makeAdditionPlates =()=> {
     console.log('makeAdditionPlates called')
-    // console.log(this.state.score)
+
 
       setTimeout(()=> {
         let copyPlates = []
@@ -170,12 +171,14 @@ feedPlate2 =(e)=> {
 }
 
 endLevelOne =()=> {
+
   this.setState({
     levelOne: false,
     levelTwo: true
   })
   this.openNextLevelModal()
   this.closeNextLevelModal()
+  this.toggleBackGround()
   this.makeAdditionPlates()
 }
 
@@ -214,7 +217,7 @@ checkAnswer =(plateItems, e)=> {
     }
     this.openCorrectModal()
     this.closeCorrectModal()
-    // alert(`Correct! You scored ${this.state.answer} bones!`)
+
   } else {
 
     let chances = this.state.chances - 1
@@ -251,25 +254,20 @@ play =()=> {
   this.makePlates()
 }
 
-closeMessage =()=> {
-  this.setState({
-    open: false
-  })
-}
+toggleBackGround =()=> {
+  
+  const background = 'linear-gradient(#9bc01c,#ffd64d,#fa6775,#f52549)'
 
-
-
-closeWrongModal =()=> {
-
+  this.backGroundRef.current.style.backgroundImage = background
 }
 
 render() {
 
   return (
 
-    <main className='mainContainer'>
+    <main ref={this.backGroundRef} className='mainContainer'>
         <div className='heading'>
-        heading
+        <h1>T-Rex Counting Game</h1>
         </div>
         <div className='cardDiv'>
             <AnswerCard answer={this.state.answer} displayAnswer={this.state.displayAnswer}/>
@@ -309,9 +307,13 @@ render() {
 
             />
         </div>
-        <footer>footer</footer>
+        <footer>
+          <span>Built by Victor Twu</span>
+          <span>victor607@gmail.com</span>
+          <span>July 2021</span>
+        </footer>
 
-        <CorrectModal correctOpen={this.state.correctOpen} />
+        <CorrectModal correctOpen={this.state.correctOpen} answer={this.state.answer} />
 
         <WrongAnswerModal wrongOpen={this.state.wrongOpen} />
 

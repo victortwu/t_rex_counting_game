@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+
+:root {
+
+}
+
 
 .mainContainer {
   display: grid;
@@ -12,13 +18,21 @@
     'trexDiv platesDiv'
     'trexDiv scoreBoardDiv'
     'footer footer';
-
+  background-image: linear-gradient(#f7dfd3,#e2c3c8,#afafc7,#5f7daf);
+  /* background-image: linear-gradient(#9bc01c,#ffd64d,#fa6775,#f52549); */
 }
 
 .heading {
   grid-area: heading;
+  text-align: center;
 
+}
 
+.heading > h1 {
+  font-family: 'Acme', sans-serif;
+  font-size: 2.75rem;
+  color: #111d9c;
+  text-shadow: 1px 1px 1px #00d2f7;
 }
 
 .cardDiv {
@@ -32,12 +46,15 @@
 .answerBubble {
   width: 75%;
   height: 75%;
+  background-color: #f9fcf0;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: solid 1px black;
-  border-radius: .5em;
+  border-radius: 1.5em;
   font-size: 2.5rem;
+  font-family: 'Acme', sans-serif;
+  color: #111d9c;
+  text-shadow: 1px 1px 1px #00d2f7;
   animation: fadeIn1 1s;
 }
 
@@ -71,14 +88,15 @@
 .plate1 {
   height: 8rem;
   width: 12rem;
+  /* background-color: #467085; */
+  background-image: linear-gradient(90deg, #467085, #365b6e);
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
   align-content: flex-start;
-  border: solid 1px black;
   border-radius: 50%;
-
+  box-shadow: .5em .5em .5em #7d7f80;
 }
 
 .plate2 {
@@ -176,20 +194,33 @@
 }
 
 .answerFeedback {
-  width: 30%;
-  height: 30%;
-  background-color: yellow;
+  width: 25%;
+  height: 25%;
+  background-color: rgba(255,255,255,.4);
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  border-radius: 1em;
   animation: fadeIn 1s;
 }
 
+#correctMessage {
+  font-family: 'Acme', sans-serif;
+  font-size: 2.5rem;
+  color: orange;
+  text-shadow: 1px 1px 1px #00d2f7;
+}
 
+#bonesEarned {
+
+}
 
 footer {
   grid-area: footer;
-
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1.5em;
 }
 
 @keyframes feedingPlate1 {
