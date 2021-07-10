@@ -7,6 +7,7 @@ import Trex from './components/Trex'
 import CorrectModal from './components/CorrectModal'
 import WrongAnswerModal from './components/WrongAnswerModal'
 import NextLevelModal from './components/NextLevelModal'
+import GameOverModal from './components/GameOverModal'
 import './App.css';
 
 class App extends Component {
@@ -14,12 +15,15 @@ class App extends Component {
     super()
     this.trexRef = React.createRef()
     this.backGroundRef = React.createRef()
+    this.plateDivRef = React.createRef()
+    this.cardDivRef = React.createRef()
     this.state = {
       levelOne: true,
       levelTwo: false,
       correctOpen: false,
       wrongOpen: false,
       nextLevelOpen: false,
+      gameOverOpen: false,
       count: 0,
       score: 0,
       chances: 5,
@@ -69,6 +73,20 @@ closeNextLevelModal =()=> {
       nextLevelOpen: false
     })
   }, 2500)
+}
+
+openGameOverModal =()=> {
+    this.setState({
+      gameOverOpen: true
+    })
+}
+
+closeGameOverModal =()=> {
+  setTimeout(()=> {
+    this.setState({
+      gameOverOpen: false
+    })
+  }, 5000)
 }
 
 setCard =(answer, displayAnswer)=> {
@@ -178,7 +196,7 @@ endLevelOne =()=> {
   })
   this.openNextLevelModal()
   this.closeNextLevelModal()
-  this.toggleBackGround()
+  this.switchLevel2BackGround()
   this.makeAdditionPlates()
 }
 
@@ -190,6 +208,7 @@ endGame =()=> {
     levelOne: true,
     chances: 5
   })
+  this.hidePlatesAndBubble()
 }
 
 checkAnswer =(plateItems, e)=> {
@@ -227,9 +246,6 @@ checkAnswer =(plateItems, e)=> {
     this.openWrongAnswerModal()
     this.closeWrongAnswerModal()
     if(this.state.chances > 1){
-      if(this.state.chances === 2){
-        alert('Last try left!')
-      }
       if(this.state.levelTwo){
         this.makeAdditionPlates()
       } else {
@@ -238,7 +254,8 @@ checkAnswer =(plateItems, e)=> {
 
     }
     else {
-      alert('Game Over')//need a modal to cover up everything
+      this.openGameOverModal()
+      this.closeGameOverModal()
       this.endGame()
     }
   }
@@ -251,14 +268,30 @@ play =()=> {
     chances: 5,
     levelOne: true
   })
+  this.switchBackToLevel1BackGround()
+  this.trexEat1()
   this.makePlates()
+  this.showPlatesAndBubble()
 }
 
-toggleBackGround =()=> {
-  
-  const background = 'linear-gradient(#9bc01c,#ffd64d,#fa6775,#f52549)'
+switchLevel2BackGround =()=> {
+  const level2BG = 'linear-gradient(#9bc01c,#ffd64d,#fa6775,#f52549)'
+  this.backGroundRef.current.style.backgroundImage = level2BG
+}
 
-  this.backGroundRef.current.style.backgroundImage = background
+switchBackToLevel1BackGround =()=> {
+  const level1BG = 'linear-gradient(#f7dfd3,#e2c3c8,#afafc7,#5f7daf)'
+  this.backGroundRef.current.style.backgroundImage = level1BG
+}
+
+hidePlatesAndBubble =()=> {
+  this.plateDivRef.current.style.display = 'none'
+  this.cardDivRef.current.style.display = 'none'
+}
+
+showPlatesAndBubble =()=> {
+  this.plateDivRef.current.style.display = 'flex'
+  this.cardDivRef.current.style.display = 'flex'
 }
 
 render() {
@@ -269,10 +302,10 @@ render() {
         <div className='heading'>
         <h1>T-Rex Counting Game</h1>
         </div>
-        <div className='cardDiv'>
+        <div ref={this.cardDivRef} className='cardDiv'>
             <AnswerCard answer={this.state.answer} displayAnswer={this.state.displayAnswer}/>
         </div>
-        <div className='platesDiv'>
+        <div ref={this.plateDivRef} className='platesDiv'>
             {
               this.state.levelOne ?
               <Plates1
@@ -315,9 +348,15 @@ render() {
 
         <CorrectModal correctOpen={this.state.correctOpen} answer={this.state.answer} />
 
-        <WrongAnswerModal wrongOpen={this.state.wrongOpen} />
+        <WrongAnswerModal
+            wrongOpen={this.state.wrongOpen}
+            gameOverOpen={this.state.gameOverOpen}
+            chances={this.state.chances}
+        />
 
         <NextLevelModal nextLevelOpen={this.state.nextLevelOpen} />
+
+        <GameOverModal gameOverOpen={this.state.gameOverOpen} />
 
     </main>
 

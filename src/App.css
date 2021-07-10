@@ -129,21 +129,33 @@
   grid-area: scoreBoardDiv;
   display: flex;
   justify-content: space-evenly;
+  color: white;
 }
 
 .scoreBoardDiv > button {
   height: 50%;
+  background: rgba(255,255,255,.5);
+  border: none;
+  border-radius: 1px;
+  color: #f700f3;
+}
+
+.scoreBoardDiv > button:hover{
+  background: rgba(255,255,255,.9);
+  color: #f7007c;
+  transition: .5s;
+  cursor: pointer;
 }
 
 .scoreBoardDiv > table {
   padding: .2em;
-  border: solid 1px black;
+  border: solid 1px white;
   border-radius: .5em;
 }
 
 #scoreCell, #chancesCell {
   text-align: center;
-  border-top: solid 1px black
+  border-top: solid 1px white;
 }
 
 
@@ -187,25 +199,42 @@
   left: 0;
   width: 100%;
   height: 10%;
-  background-color: red;
+  background-color: rgba(255,255,255,.4);
   display: flex;
   justify-content: space-around;
   align-items: center;
+  font-family: 'Acme', sans-serif;
+  font-size: 2.5rem;
+  color: orange;
+  text-shadow: 1px 1px 1px #00d2f7;
+
 }
 
 .answerFeedback {
   width: 25%;
   height: 25%;
-  background-color: rgba(255,255,255,.4);
+  /* background-color: rgba(255,255,255,.4); */
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  border-radius: 1em;
+  /* border-radius: 1em; */
   animation: fadeIn 1s;
 }
 
-#correctMessage {
+.wrongAnswerFeedback {
+  width: 25%;
+  height: 25%;
+  /* background-color: #f9fcf0; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border-radius: 1em; */
+  animation: fadeIn 1s;
+}
+
+#correctMessage, #wrongAnswerSpan {
   font-family: 'Acme', sans-serif;
   font-size: 2.5rem;
   color: orange;
@@ -213,7 +242,16 @@
 }
 
 #bonesEarned {
+  color: white
+}
 
+#xSpan {
+  font-size: 3rem;
+  color: red
+}
+
+#gameOverH1 {
+  color: white
 }
 
 footer {
@@ -221,6 +259,7 @@ footer {
   display: flex;
   justify-content: space-evenly;
   padding: 1.5em;
+  color: white;
 }
 
 @keyframes feedingPlate1 {
