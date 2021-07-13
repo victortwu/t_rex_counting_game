@@ -13,14 +13,23 @@ const CorrectModal =(props)=> {
 
 
   return(
+
+
     <div className={toggleClass}>
       <div className='modalContainerNoBackground'>
         <div className='answerFeedback'>
-        <span id='correctMessage'>{getRandomMessage()}</span>
+        <span id='correctMessage'>
+        {
+          (props.nextLevelMessage) ? 'YOU GOT TO THE NEXT LEVEL!!'
+          : getRandomMessage()
+        }
+        </span>
         <span id='bonesEarned'>You earned {props.answer} bones!</span>
         </div>
       </div>
     </div>
+
+
   )
 }
 

@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 
 :root {
-
+  --levelOneBGImage: linear-gradient(#f7dfd3,#e2c3c8,#afafc7,#5f7daf);
+  --levelTwoBGImage: linear-gradient(#9bc01c,#ffd64d,#fa6775,#f52549)
 }
 
 
@@ -178,7 +179,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: rgba(0,0,0,.8)
+  background-color: rgba(255,255,255,.4)
 }
 
 .modalContainerNoBackground {
@@ -327,10 +328,14 @@ footer {
 }
 
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
+
+@keyframes fadeBackground {
+  20% {background-image: var(--levelTwoBGImage)}
+  40% {background-image: var(--levelOneBGImage)}
+  60% {background-image: var(--levelTwoBGImage)}
+  80% {background-image: var(--levelOneBGImage)}
+  100% {background-image: var(--levelTwoBGImage)}
 }

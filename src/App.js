@@ -6,7 +6,6 @@ import AnswerCard from './components/AnswerCard'
 import Trex from './components/Trex'
 import CorrectModal from './components/CorrectModal'
 import WrongAnswerModal from './components/WrongAnswerModal'
-import NextLevelModal from './components/NextLevelModal'
 import GameOverModal from './components/GameOverModal'
 import './App.css';
 
@@ -22,7 +21,7 @@ class App extends Component {
       levelTwo: false,
       correctOpen: false,
       wrongOpen: false,
-      nextLevelOpen: false,
+      nextLevelMessage: false,
       gameOverOpen: false,
       count: 0,
       score: 0,
@@ -58,19 +57,19 @@ closeWrongAnswerModal =()=> {
     this.setState({
       wrongOpen: false
     })
-  }, 2500)
+  }, 1500)
 }
 
-openNextLevelModal =()=> {
+setNextLevelMessage =()=> {
     this.setState({
-      nextLevelOpen: true
+      nextLevelMessage: true
     })
 }
 
-closeNextLevelModal =()=> {
+closeNextLevelMessage =()=> {
   setTimeout(()=> {
     this.setState({
-      nextLevelOpen: false
+      nextLevelMessage: false
     })
   }, 2500)
 }
@@ -194,8 +193,8 @@ endLevelOne =()=> {
     levelOne: false,
     levelTwo: true
   })
-  this.openNextLevelModal()
-  this.closeNextLevelModal()
+  this.setNextLevelMessage()
+  this.closeNextLevelMessage()
   this.switchLevel2BackGround()
   this.makeAdditionPlates()
 }
@@ -269,14 +268,13 @@ play =()=> {
     levelOne: true
   })
   this.switchBackToLevel1BackGround()
-  this.trexEat1()
   this.makePlates()
   this.showPlatesAndBubble()
 }
 
 switchLevel2BackGround =()=> {
-  const level2BG = 'linear-gradient(#9bc01c,#ffd64d,#fa6775,#f52549)'
-  this.backGroundRef.current.style.backgroundImage = level2BG
+  const animation = 'fadeBackground 1.5s linear forwards'
+  this.backGroundRef.current.style.animation = animation
 }
 
 switchBackToLevel1BackGround =()=> {
@@ -346,7 +344,12 @@ render() {
           <span>July 2021</span>
         </footer>
 
-        <CorrectModal correctOpen={this.state.correctOpen} answer={this.state.answer} />
+        <CorrectModal
+          correctOpen={this.state.correctOpen}
+          answer={this.state.answer}
+          nextLevelMessage={this.state.nextLevelMessage}
+
+        />
 
         <WrongAnswerModal
             wrongOpen={this.state.wrongOpen}
@@ -354,7 +357,7 @@ render() {
             chances={this.state.chances}
         />
 
-        <NextLevelModal nextLevelOpen={this.state.nextLevelOpen} />
+
 
         <GameOverModal gameOverOpen={this.state.gameOverOpen} />
 
