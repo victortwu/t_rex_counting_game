@@ -7,9 +7,10 @@ const Plates2 =(props)=> {
 
     if ( props.score >= 100 ) {
 
-
-      alert('YOU WON!')
       props.endGame()
+      props.openYouWinModal()
+      props.closeYouWinModal()
+
 
     } else {
       const appendDrumsticks = (len) => {

@@ -7,6 +7,7 @@ import Trex from './components/Trex'
 import CorrectModal from './components/CorrectModal'
 import WrongAnswerModal from './components/WrongAnswerModal'
 import GameOverModal from './components/GameOverModal'
+import YouWinModal from './components/YouWinModal'
 import './App.css';
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
       wrongOpen: false,
       nextLevelMessage: false,
       gameOverOpen: false,
+      youWinOpen: false,
       count: 0,
       score: 0,
       chances: 5,
@@ -84,6 +86,20 @@ closeGameOverModal =()=> {
   setTimeout(()=> {
     this.setState({
       gameOverOpen: false
+    })
+  }, 5000)
+}
+
+openYouWinModal =()=> {
+    this.setState({
+      youWinOpen: true
+    })
+}
+
+closeYouWinModal =()=> {
+  setTimeout(()=> {
+    this.setState({
+      youWinOpen: false
     })
   }, 5000)
 }
@@ -321,6 +337,8 @@ render() {
                 closeMessage={this.closeMessage}
                 checkAnswer={this.checkAnswer}
                 plates={this.state.plates}
+                openYouWinModal={this.openYouWinModal}
+                closeYouWinModal={this.closeYouWinModal}
                 endGame={this.endGame}
               />
             }
@@ -357,7 +375,7 @@ render() {
             chances={this.state.chances}
         />
 
-
+        <YouWinModal youWinOpen={this.state.youWinOpen}/>
 
         <GameOverModal gameOverOpen={this.state.gameOverOpen} />
 
