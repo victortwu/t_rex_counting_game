@@ -1,27 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 import '../App.css'
 
-class Plates1 extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      message: true
-    }
-  }
+const Plates1 =(props)=> {
 
+  let plates
 
+      if ( props.score >= 50 ) {
 
-  render(){
-
-
-
-    let plates
-
-      if ( this.props.score >= 50 ) {
-
-
-        // this.props.endGame()
-        this.props.endLevelOne()
+        props.endLevelOne()
 
       } else {
         const appendDrumsticks = (len) => {
@@ -31,34 +17,20 @@ class Plates1 extends Component {
           }
           return drumSticks
         }
-        
-        plates = this.props.plates.map((plate, index)=> {
+
+        plates = props.plates.map((plate, index)=> {
 
           return(
             <div
               key={index}
               className={plate.className}
-              onClick={
-                (e)=> this.props.checkAnswer(plate.value, e)
-
-              }
+              onClick={(e)=> props.checkAnswer(plate.value, e)}
             >
-
               {appendDrumsticks(plate.value)}
-
             </div>
             )
           })
       }
-
-
-    // if (this.props.levelOne){
-    //   checkWinner()
-    // }
-
-
-
-
 
     return(
       <>
@@ -66,10 +38,6 @@ class Plates1 extends Component {
       </>
     )
 
-
-  }
 }
-
-
 
 export default Plates1
