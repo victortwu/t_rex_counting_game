@@ -101,7 +101,7 @@ closeYouWinModal =()=> {
     this.setState({
       youWinOpen: false
     })
-  }, 5000)
+  }, 8000)
 }
 
 setCard =(answer, displayAnswer)=> {

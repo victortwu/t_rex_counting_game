@@ -7,7 +7,9 @@ const toggleClass = props.youWinOpen ? 'show' : 'hide'
   return(
     <div className={toggleClass}>
       <div className='youWinModalBackground'>
-      <h1>YOU WIN!</h1>
+        <div className='youWinContainer'>
+          <h1>YOU WIN!</h1>
+        </div>
       </div>
     </div>
   )
